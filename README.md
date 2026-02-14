@@ -5,6 +5,8 @@
 A multi-user drawing application where multiple people can draw simultaneously on the same canvas with real-time
 synchronization.
 
+Try it now - https://collaborative-drawing-canvas-chch.onrender.com
+
 ## 🎯 Core Features Implemented
 
 ### Frontend Features
