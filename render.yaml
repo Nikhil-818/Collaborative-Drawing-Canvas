@@ -1,28 +1,10 @@
 services:
-  # WebSocket Server
-  - type: web
-    name: collab-draw-ws
-    env: node
-    buildCommand: npm install
-    startCommand: node server/server.js
-    envVars:
-      - key: WS_PORT
-        value: 10000
-      - key: NODE_ENV
-        value: production
-
-  # Next.js Frontend
-  - type: web
+  # Next.js Frontend (Static Export)
+  - type: static
     name: collab-draw-app
-    env: node
+    env: static
     buildCommand: npm install && npm run build
-    startCommand: npm run start:prod
+    staticPublishPath: out
     envVars:
       - key: NEXT_PUBLIC_WS_URL
-        fromService:
-          type: web
-          name: collab-draw-ws
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: NODE_ENV
-        value: production
-
+        value: https://replace-with-your-railway-url

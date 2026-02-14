@@ -6,6 +6,21 @@ import type {Path, Point, User, UserCursor, Shape, TextElement, ImageElement, Se
 
 const DEFAULT_WS_URL = 'ws://localhost:9001';
 
+function resolveWsUrl() {
+    const envUrl = process.env.NEXT_PUBLIC_WS_URL;
+    if (envUrl) {
+        return envUrl;
+    }
+    if (typeof window === 'undefined') {
+        return DEFAULT_WS_URL;
+    }
+    if (window.location.hostname === 'localhost') {
+        return DEFAULT_WS_URL;
+    }
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    return `${protocol}://${window.location.host}`;
+}
+
 type UseCollabSocketOptions = {
     name: string;
     color: string;
@@ -60,7 +75,7 @@ export function useCollabSocket(
 
     const socketRef = useRef<WebSocket | null>(null);
 
-    const wsUrl = useMemo(() => process.env.NEXT_PUBLIC_WS_URL || DEFAULT_WS_URL, []);
+    const wsUrl = useMemo(() => resolveWsUrl(), []);
 
     const updateState = useCallback((partial: Partial<CollabState>) => {
         setState((prev) => ({...prev, ...partial}));

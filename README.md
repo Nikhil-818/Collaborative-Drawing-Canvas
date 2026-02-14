@@ -144,4 +144,3 @@ See **ARCHITECTURE.md** for detailed information about:
 - ✅ Drawing persistence (save/load sessions)
 - ✅ Performance metrics display
 - ✅ Creative features (shapes: rectangle, circle, triangle, line)
-
